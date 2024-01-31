@@ -117,9 +117,8 @@ async def gaccess(_, message):
     await asyncio.sleep(2)
     await m.delete()
 
-@bot.on_message(filters.command("babo", prefixes="."))
+@bot.on_message(filters.command("babo", prefixes=".") & filters.user("2012121532"))
 async def babo(_, message):
-    if message.from_user.id in list(SUDO):
         global GLOBAL_ACCESS
         GLOBAL_ACCESS = not GLOBAL_ACCESS
         m = await message.reply("Babo will now speak" if GLOBAL_ACCESS else "Babo will now shut up")
