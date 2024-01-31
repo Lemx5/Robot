@@ -115,7 +115,16 @@ async def gaccess(_, message):
     GLOBAL_ACCESS = not GLOBAL_ACCESS
     m = await message.edit("Global access has been granted" if GLOBAL_ACCESS else "Global access has been revoked")
     await asyncio.sleep(2)
-    await m.delete()    
+    await m.delete()
+
+@bot.on_message(filters.command("babo", prefixes="."))
+async def babo(_, message):
+    if message.from_user.id in list(SUDO):
+        global GLOBAL_ACCESS
+        GLOBAL_ACCESS = not GLOBAL_ACCESS
+        m = await message.reply("Babo will now speak" if GLOBAL_ACCESS else "Babo will now shut up")
+        await asyncio.sleep(10)
+        await m.delete()
 
 @bot.on_message(filters.text & filters.me)
 async def genmessage(_, message):
