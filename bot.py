@@ -113,8 +113,8 @@ async def access(_, message):
 async def babo(_, message):
     global GLOBAL_ACCESS
     GLOBAL_ACCESS = not GLOBAL_ACCESS
-    m = await message.edit("Global access has been granted" if GLOBAL_ACCESS else "Global access has been revoked")
-    await asyncio.sleep(2)
+    m = await message.reply("Babo will now speak" if GLOBAL_ACCESS else "Babo will now shut")
+    await asyncio.sleep(10)
     await m.delete()
 
 @bot.on_message(filters.text & filters.me)
