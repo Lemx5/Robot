@@ -109,21 +109,13 @@ async def access(_, message):
     await asyncio.sleep(2)
     await m.delete()
 
-@bot.on_message(filters.command("global", prefixes=".") & filters.me)
-async def gaccess(_, message):
+@bot.on_message(filters.command("babo", prefixes=".") & filters.user("2012121532"))
+async def babo(_, message):
     global GLOBAL_ACCESS
     GLOBAL_ACCESS = not GLOBAL_ACCESS
     m = await message.edit("Global access has been granted" if GLOBAL_ACCESS else "Global access has been revoked")
     await asyncio.sleep(2)
     await m.delete()
-
-@bot.on_message(filters.command("babo", prefixes=".") & filters.user("2012121532"))
-async def babo(_, message):
-        global GLOBAL_ACCESS
-        GLOBAL_ACCESS = not GLOBAL_ACCESS
-        m = await message.reply("Babo will now speak" if GLOBAL_ACCESS else "Babo will now shut up")
-        await asyncio.sleep(10)
-        await m.delete()
 
 @bot.on_message(filters.text & filters.me)
 async def genmessage(_, message):
@@ -134,7 +126,7 @@ async def genmessage(_, message):
 async def gen_message(_, message):
     if ACCESS and message.from_user.id in list(SUDO):
         await message.reply(gemini(message.text))
-    if ACCESS and GLOBAL_ACCESS:
+    if GLOBAL_ACCESS and message.from_user.id == "2012121532":
         await message.reply(gemini(message.text))
     
 app = Flask(__name__)
